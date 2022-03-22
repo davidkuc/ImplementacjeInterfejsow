@@ -83,8 +83,6 @@ namespace Zadanie1.Devices
             IDocument document;
             Scan(out document, IDocument.FormatType.JPG);
             Print(document);
-            ScanCounter++;
-            PrintCounter++;
         }
 
     }
