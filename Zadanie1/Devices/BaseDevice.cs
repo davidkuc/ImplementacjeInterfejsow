@@ -11,8 +11,15 @@
 
     public void PowerOn()
     {
+        if (state != IDevice.State.on)
+        {
+            Counter++;
+        }
+
         state = IDevice.State.on;
         Console.WriteLine("Device is on ...");
+
+
     }
 
     public int Counter { get; private set; } = 0;

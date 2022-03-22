@@ -2,5 +2,5 @@
 {
     // dokument jest skanowany, jeśli urządzenie włączone
     // w przeciwnym przypadku nic się dzieje
-    void Scan(IDocument.FormatType formatType);
+    void Scan(out IDocument document, IDocument.FormatType formatType);
 }
