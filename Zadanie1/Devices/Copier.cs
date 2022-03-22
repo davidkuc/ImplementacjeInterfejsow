@@ -28,7 +28,7 @@ namespace Zadanie1.Devices
 
             if (state != IDevice.State.on)
             {
-                fileName = $"NoType{ScanCounter}";
+                fileName = $"TextScan{ScanCounter}";
                 document = new TextDocument(fileName);
                 return;
             }
@@ -65,11 +65,11 @@ namespace Zadanie1.Devices
 
             if (state != IDevice.State.on)
             {
-                fileName = $"NoType{ScanCounter}";
+                fileName = $"TextScan{ScanCounter}";
                 document = new TextDocument(fileName);
                 return;
             }
-            fileName = $"NoType{ScanCounter}";
+            fileName = $"TextScan{ScanCounter}";
             document = new TextDocument(fileName);
             Console.WriteLine($"{DateTime.Now} Scan: {fileName}.txt");
             ScanCounter++;
