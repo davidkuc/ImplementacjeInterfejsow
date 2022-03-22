@@ -69,7 +69,9 @@ namespace Zadanie1.Devices
                 document = new TextDocument(fileName);
                 return;
             }
-            document = new PDFDocument(fileName);
+            fileName = $"NoType{ScanCounter}";
+            document = new TextDocument(fileName);
+            Console.WriteLine($"{DateTime.Now} Scan: {fileName}.txt");
             ScanCounter++;
         }
 
