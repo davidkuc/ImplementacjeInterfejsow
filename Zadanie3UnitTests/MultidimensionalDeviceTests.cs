@@ -7,14 +7,14 @@ namespace Zadanie3UnitTests
     [TestClass]
     public class UnitTestMultidimensionalDevice
     {
-       
+
         [TestMethod]
         public void MultidimensionalDevice_GetState_StateOff()
         {
             var multidimensionalDevice = new MultidimensionalDevice
                 (
-                new Printer(), 
-                new Scanner(), 
+                new Printer(),
+                new Scanner(),
                 new Fax()
                 );
             multidimensionalDevice.PowerOff();
@@ -551,12 +551,36 @@ namespace Zadanie3UnitTests
 
             multidimensionalDevice.PowerOn();
             multidimensionalDevice.AllDevicesPowerOn();
-            var devicesStates = multidimensionalDevice.GetDevicesStates();
 
-            Assert.IsTrue(multidimensionalDevice.GetState() == IDevice.State.on);
-            Assert.IsTrue(devicesStates["Printer"] == IDevice.State.off);
-            Assert.IsTrue(devicesStates["Scanner"] == IDevice.State.off);
-            Assert.IsTrue(devicesStates["Fax"] == IDevice.State.off);
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultidimensionalDevice_PowerOff()
+        {
+            var multidimensionalDevice = new MultidimensionalDevice
+                (
+                new Printer(),
+                new Scanner(),
+                new Fax()
+                );
+
+            multidimensionalDevice.PowerOff();
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                multidimensionalDevice.AllDevicesPowerOn();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($" is turned off."));
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
         }
     }
 }

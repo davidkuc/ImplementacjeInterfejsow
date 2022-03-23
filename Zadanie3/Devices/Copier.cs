@@ -67,30 +67,59 @@ namespace Zadanie3.Devices
 
         public void ScannerPowerOn()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return;
+            }
+
             _scanner.PowerOn();
             Console.WriteLine($"{_scanner.GetType().Name} has been turned on.");
         }
 
         public void ScannerPowerOff()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return;
+            }
+
             _scanner.PowerOff();
             Console.WriteLine($"{_scanner.GetType().Name} has been turned off.");
         }
 
         public void PrinterPowerOn()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return;
+            }
+
             _printer.PowerOn();
             Console.WriteLine($"{_printer.GetType().Name} has been turned on.");
         }
 
         public void PrinterPowerOff()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return;
+            }
+
             _printer.PowerOff();
             Console.WriteLine($"{_printer.GetType().Name} has been turned off.");
         }
 
         public virtual void AllDevicesPowerOn()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return;
+            }
             _printer.PowerOn();
             _scanner.PowerOn();
             Console.WriteLine($"{_printer.GetType().Name} has been turned on.");
@@ -99,6 +128,11 @@ namespace Zadanie3.Devices
 
         public virtual void AllDevicesPowerOff()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return;
+            }
             _printer.PowerOff();
             _scanner.PowerOff();
             Console.WriteLine($"{_printer.GetType().Name} has been turned off.");
@@ -107,6 +141,11 @@ namespace Zadanie3.Devices
 
         public virtual Dictionary<string, IDevice.State> GetDevicesStates()
         {
+            if (state != IDevice.State.on)
+            {
+                Console.WriteLine($"{this.GetType().Name} is turned off.");
+                return null;
+            }
             var devicesStates = new Dictionary<string, IDevice.State>()
             {
                 {"Printer", _printer.GetState() },
