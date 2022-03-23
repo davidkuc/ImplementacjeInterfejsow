@@ -6,6 +6,6 @@
 
         void Send(in IDocument document);
 
-
+        
     }
 }

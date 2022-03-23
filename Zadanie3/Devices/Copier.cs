@@ -95,7 +95,18 @@ namespace Zadanie3.Devices
         {
             _printer.PowerOff();
             _scanner.PowerOff();
-        }     
+        }
+
+        public virtual Dictionary<string, IDevice.State> GetDevicesStates()
+        {
+            var devicesStates = new Dictionary<string, IDevice.State>()
+            {
+                {"Printer", _printer.GetState() },
+                {"Scanner", _scanner.GetState() }
+            };
+
+            return devicesStates;
+        }
     }
 }
 

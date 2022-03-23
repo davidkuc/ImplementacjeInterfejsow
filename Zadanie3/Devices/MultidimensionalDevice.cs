@@ -29,5 +29,13 @@
             base.AllDevicesPowerOff();
             _fax.PowerOff();
         }
+
+        public override Dictionary<string, IDevice.State> GetDevicesStates()
+        {
+            var devicesStates = base.GetDevicesStates();
+            devicesStates.Add("Fax", _fax.GetState());
+
+            return devicesStates;
+        }
     }
 }

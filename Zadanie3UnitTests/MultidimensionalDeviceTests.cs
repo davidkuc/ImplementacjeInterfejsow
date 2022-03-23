@@ -498,5 +498,25 @@ namespace Zadanie3UnitTests
 
             Assert.IsTrue(Equals(doc.GetType(), typeof(ImageDocument)));
         }
+
+        [TestMethod]
+        public void MultidimensionalDevice_AllDevicesPowerOn()
+        {
+            var multidimensionalDevice = new MultidimensionalDevice
+                (
+                new Printer(),
+                new Scanner(),
+                new Fax()
+                );
+
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
+            var devicesStates = multidimensionalDevice.GetDevicesStates();
+
+            Assert.IsTrue(multidimensionalDevice.GetState() == IDevice.State.on);
+            Assert.IsTrue(devicesStates["Printer"] == IDevice.State.on);
+            Assert.IsTrue(devicesStates["Scanner"] == IDevice.State.on);
+            Assert.IsTrue(devicesStates["Fax"] == IDevice.State.on);
+        }
     }
 }

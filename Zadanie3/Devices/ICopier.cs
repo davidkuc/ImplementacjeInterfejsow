@@ -30,5 +30,7 @@ namespace Zadanie3.Devices
         void AllDevicesPowerOn();
 
         void AllDevicesPowerOff();
+
+        Dictionary<string, IDevice.State> GetDevicesStates();
     }
 }
