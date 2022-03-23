@@ -68,33 +68,41 @@ namespace Zadanie3.Devices
         public void ScannerPowerOn()
         {
             _scanner.PowerOn();
+            Console.WriteLine($"{_scanner.GetType().Name} has been turned on.");
         }
 
         public void ScannerPowerOff()
         {
             _scanner.PowerOff();
+            Console.WriteLine($"{_scanner.GetType().Name} has been turned off.");
         }
 
         public void PrinterPowerOn()
         {
             _printer.PowerOn();
+            Console.WriteLine($"{_printer.GetType().Name} has been turned on.");
         }
 
         public void PrinterPowerOff()
         {
             _printer.PowerOff();
+            Console.WriteLine($"{_printer.GetType().Name} has been turned off.");
         }
 
         public virtual void AllDevicesPowerOn()
         {
             _printer.PowerOn();
             _scanner.PowerOn();
+            Console.WriteLine($"{_printer.GetType().Name} has been turned on.");
+            Console.WriteLine($"{_scanner.GetType().Name} has been turned on.");
         }
 
         public virtual void AllDevicesPowerOff()
         {
             _printer.PowerOff();
             _scanner.PowerOff();
+            Console.WriteLine($"{_printer.GetType().Name} has been turned off.");
+            Console.WriteLine($"{_scanner.GetType().Name} has been turned off.");
         }
 
         public virtual Dictionary<string, IDevice.State> GetDevicesStates()

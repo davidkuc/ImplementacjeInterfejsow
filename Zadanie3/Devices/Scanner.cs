@@ -10,8 +10,7 @@
 
             if (state != IDevice.State.on)
             {
-                fileName = $"TextScan{ScanCounter}";
-                document = new TextDocument(fileName);
+                document = null;
                 return;
             }
 

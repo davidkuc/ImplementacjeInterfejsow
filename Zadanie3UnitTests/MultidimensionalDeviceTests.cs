@@ -518,5 +518,45 @@ namespace Zadanie3UnitTests
             Assert.IsTrue(devicesStates["Scanner"] == IDevice.State.on);
             Assert.IsTrue(devicesStates["Fax"] == IDevice.State.on);
         }
+
+        [TestMethod]
+        public void MultidimensionalDevice_AllDevicesPowerOff()
+        {
+            var multidimensionalDevice = new MultidimensionalDevice
+                (
+                new Printer(),
+                new Scanner(),
+                new Fax()
+                );
+
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOff();
+            var devicesStates = multidimensionalDevice.GetDevicesStates();
+
+            Assert.IsTrue(multidimensionalDevice.GetState() == IDevice.State.on);
+            Assert.IsTrue(devicesStates["Printer"] == IDevice.State.off);
+            Assert.IsTrue(devicesStates["Scanner"] == IDevice.State.off);
+            Assert.IsTrue(devicesStates["Fax"] == IDevice.State.off);
+        }
+
+        [TestMethod]
+        public void MultidimensionalDevice_PowerOn()
+        {
+            var multidimensionalDevice = new MultidimensionalDevice
+                (
+                new Printer(),
+                new Scanner(),
+                new Fax()
+                );
+
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
+            var devicesStates = multidimensionalDevice.GetDevicesStates();
+
+            Assert.IsTrue(multidimensionalDevice.GetState() == IDevice.State.on);
+            Assert.IsTrue(devicesStates["Printer"] == IDevice.State.off);
+            Assert.IsTrue(devicesStates["Scanner"] == IDevice.State.off);
+            Assert.IsTrue(devicesStates["Fax"] == IDevice.State.off);
+        }
     }
 }

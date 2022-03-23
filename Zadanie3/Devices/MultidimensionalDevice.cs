@@ -18,16 +18,31 @@
             _fax.Send(document);
         }
 
+        public void FaxPowerOn()
+        {
+            _fax.PowerOn();
+            Console.WriteLine($"{_fax.GetType().Name} has been turned on.");
+        }
+
+        public void FaxPowerOff()
+        {
+            _fax.PowerOff();
+            Console.WriteLine($"{_fax.GetType().Name} has been turned off.");
+        }
+
         public override void AllDevicesPowerOn()
         {
             base.AllDevicesPowerOn();
             _fax.PowerOn();
+            Console.WriteLine($"{_fax.GetType().Name} has been turned on.");
+
         }
 
         public override void AllDevicesPowerOff()
         {
             base.AllDevicesPowerOff();
             _fax.PowerOff();
+            Console.WriteLine($"{_fax.GetType().Name} has been turned off.");
         }
 
         public override Dictionary<string, IDevice.State> GetDevicesStates()
