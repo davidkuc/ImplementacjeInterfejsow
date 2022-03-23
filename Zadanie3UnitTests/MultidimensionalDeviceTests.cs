@@ -9,38 +9,38 @@ namespace Zadanie3UnitTests
     {
        
         [TestMethod]
-        public void MultifunctionalDevice_GetState_StateOff()
+        public void MultidimensionalDevice_GetState_StateOff()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(), 
                 new Scanner(), 
                 new Fax()
                 );
-            multifunctionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
 
-            Assert.AreEqual(IDevice.State.off, multifunctionalDevice.GetState());
+            Assert.AreEqual(IDevice.State.off, multidimensionalDevice.GetState());
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_GetState_StateOn()
+        public void MultidimensionalDevice_GetState_StateOn()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
+            multidimensionalDevice.PowerOn();
 
-            Assert.AreEqual(IDevice.State.on, multifunctionalDevice.GetState());
+            Assert.AreEqual(IDevice.State.on, multidimensionalDevice.GetState());
         }
 
 
         // weryfikacja, czy po wywołaniu metody `Print` i włączonej kopiarce w napisie pojawia się słowo `Print`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
-        public void MultifunctionalDevice_Print_DeviceOn()
+        public void MultidimensionalDevice_Print_DeviceOn()
         {
             var multifunctionalDevice = new MultidimensionalDevice
                 (
@@ -65,7 +65,7 @@ namespace Zadanie3UnitTests
         // weryfikacja, czy po wywołaniu metody `Print` i wyłączonej kopiarce w napisie NIE pojawia się słowo `Print`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
-        public void MultifunctionalDevice_Print_DeviceOff()
+        public void MultidimensionalDevice_Print_DeviceOff()
         {
             var multifunctionalDevice = new MultidimensionalDevice
                  (
@@ -90,7 +90,7 @@ namespace Zadanie3UnitTests
         // weryfikacja, czy po wywołaniu metody `Scan` i wyłączonej kopiarce w napisie NIE pojawia się słowo `Scan`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
-        public void MultifunctionalDevice_Scan_DeviceOff()
+        public void MultidimensionalDevice_Scan_DeviceOff()
         {
             var multifunctionalDevice = new MultidimensionalDevice
                  (
@@ -114,23 +114,23 @@ namespace Zadanie3UnitTests
         // weryfikacja, czy po wywołaniu metody `Scan` i wyłączonej kopiarce w napisie pojawia się słowo `Scan`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
-        public void MultifunctionalDevice_Scan_DeviceOn()
+        public void MultidimensionalDevice_Scan_DeviceOn()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1;
-                multifunctionalDevice.Scan(out doc1);
+                multidimensionalDevice.Scan(out doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
@@ -139,31 +139,31 @@ namespace Zadanie3UnitTests
         // weryfikacja, czy wywołanie metody `Scan` z parametrem określającym format dokumentu
         // zawiera odpowiednie rozszerzenie (`.jpg`, `.txt`, `.pdf`)
         [TestMethod]
-        public void MultifunctionalDevice_Scan_FormatTypeDocument()
+        public void MultidimensionalDevice_Scan_FormatTypeDocument()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1;
-                multifunctionalDevice.Scan(out doc1, formatType: IDocument.FormatType.JPG);
+                multidimensionalDevice.Scan(out doc1, formatType: IDocument.FormatType.JPG);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains(".jpg"));
 
-                multifunctionalDevice.Scan(out doc1, formatType: IDocument.FormatType.TXT);
+                multidimensionalDevice.Scan(out doc1, formatType: IDocument.FormatType.TXT);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains(".txt"));
 
-                multifunctionalDevice.Scan(out doc1, formatType: IDocument.FormatType.PDF);
+                multidimensionalDevice.Scan(out doc1, formatType: IDocument.FormatType.PDF);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains(".pdf"));
             }
@@ -175,22 +175,22 @@ namespace Zadanie3UnitTests
         // oraz `Scan`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
-        public void MultifunctionalDevice_ScanAndPrint_DeviceOn()
+        public void MultidimensionalDevice_ScanAndPrint_DeviceOn()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
-                multifunctionalDevice.ScanAndPrint();
+                multidimensionalDevice.ScanAndPrint();
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Print"));
             }
@@ -201,21 +201,21 @@ namespace Zadanie3UnitTests
         // ani słowo `Scan`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
-        public void MultifunctionalDevice_ScanAndPrint_DeviceOff()
+        public void MultidimensionalDevice_ScanAndPrint_DeviceOff()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
-                multifunctionalDevice.ScanAndPrint();
+                multidimensionalDevice.ScanAndPrint();
                 Assert.IsFalse(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsFalse(consoleOutput.GetOutput().Contains("Print"));
             }
@@ -223,146 +223,146 @@ namespace Zadanie3UnitTests
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_PrintCounter()
+        public void MultidimensionalDevice_PrintCounter()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                  (
                  new Printer(),
                  new Scanner(),
                  new Fax()
                  );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             IDocument doc1 = new PDFDocument("aaa.pdf");
-            multifunctionalDevice.Print(in doc1);
+            multidimensionalDevice.Print(in doc1);
             IDocument doc2 = new TextDocument("aaa.txt");
-            multifunctionalDevice.Print(in doc2);
+            multidimensionalDevice.Print(in doc2);
             IDocument doc3 = new ImageDocument("aaa.jpg");
-            multifunctionalDevice.Print(in doc3);
+            multidimensionalDevice.Print(in doc3);
 
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.Print(in doc3);
-            multifunctionalDevice.Scan(out doc1);
-            multifunctionalDevice.PowerOn();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.Print(in doc3);
+            multidimensionalDevice.Scan(out doc1);
+            multidimensionalDevice.PowerOn();
 
-            multifunctionalDevice.ScanAndPrint();
-            multifunctionalDevice.ScanAndPrint();
+            multidimensionalDevice.ScanAndPrint();
+            multidimensionalDevice.ScanAndPrint();
 
             // 5 wydruków, gdy urządzenie włączone
-            Assert.AreEqual(5, multifunctionalDevice.PrintCounter);
+            Assert.AreEqual(5, multidimensionalDevice.PrintCounter);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_ScanCounter()
+        public void MultidimensionalDevice_ScanCounter()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             IDocument doc1;
-            multifunctionalDevice.Scan(out doc1);
+            multidimensionalDevice.Scan(out doc1);
             IDocument doc2;
-            multifunctionalDevice.Scan(out doc2);
+            multidimensionalDevice.Scan(out doc2);
 
             IDocument doc3 = new ImageDocument("aaa.jpg");
-            multifunctionalDevice.Print(in doc3);
+            multidimensionalDevice.Print(in doc3);
 
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.Print(in doc3);
-            multifunctionalDevice.Scan(out doc1);
-            multifunctionalDevice.PowerOn();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.Print(in doc3);
+            multidimensionalDevice.Scan(out doc1);
+            multidimensionalDevice.PowerOn();
 
-            multifunctionalDevice.ScanAndPrint();
-            multifunctionalDevice.ScanAndPrint();
+            multidimensionalDevice.ScanAndPrint();
+            multidimensionalDevice.ScanAndPrint();
 
             // 4 skany, gdy urządzenie włączone
-            Assert.AreEqual(4, multifunctionalDevice.ScanCounter);
+            Assert.AreEqual(4, multidimensionalDevice.ScanCounter);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_PowerOnCounter()
+        public void MultidimensionalDevice_PowerOnCounter()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.PowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.PowerOn();
 
             IDocument doc1;
-            multifunctionalDevice.Scan(out doc1);
+            multidimensionalDevice.Scan(out doc1);
             IDocument doc2;
-            multifunctionalDevice.Scan(out doc2);
+            multidimensionalDevice.Scan(out doc2);
 
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.PowerOn();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.PowerOn();
 
             IDocument doc3 = new ImageDocument("aaa.jpg");
-            multifunctionalDevice.Print(in doc3);
+            multidimensionalDevice.Print(in doc3);
 
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.Print(in doc3);
-            multifunctionalDevice.Scan(out doc1);
-            multifunctionalDevice.PowerOn();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.Print(in doc3);
+            multidimensionalDevice.Scan(out doc1);
+            multidimensionalDevice.PowerOn();
 
-            multifunctionalDevice.ScanAndPrint();
-            multifunctionalDevice.ScanAndPrint();
+            multidimensionalDevice.ScanAndPrint();
+            multidimensionalDevice.ScanAndPrint();
 
             // 3 włączenia
-            Assert.AreEqual(3, multifunctionalDevice.Counter);
+            Assert.AreEqual(3, multidimensionalDevice.Counter);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_Scan_PowerOff()
+        public void MultidimensionalDevice_Scan_PowerOff()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1;
-                multifunctionalDevice.Scan(out doc1);
+                multidimensionalDevice.Scan(out doc1);
                 Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_Scan_PowerOn()
+        public void MultidimensionalDevice_Scan_PowerOn()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1;
-                multifunctionalDevice.Scan(out doc1);
+                multidimensionalDevice.Scan(out doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains(".jpg"));
             }
@@ -370,23 +370,23 @@ namespace Zadanie3UnitTests
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_Send_PowerOn()
+        public void MultidimensionalDevice_Send_PowerOn()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                  (
                  new Printer(),
                  new Scanner(),
                  new Fax()
                  );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1 = new ImageDocument("aaa.jpg");
-                multifunctionalDevice.Send(doc1);
+                multidimensionalDevice.Send(doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("File sent"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Image"));
                 Assert.IsTrue(consoleOutput.GetOutput().Contains(".jpg"));
@@ -395,107 +395,107 @@ namespace Zadanie3UnitTests
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_Send_PowerOff()
+        public void MultidimensionalDevice_Send_PowerOff()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1 = new ImageDocument("aaa.jpg");
-                multifunctionalDevice.Send(doc1);
+                multidimensionalDevice.Send(doc1);
                 Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_SendCounter()
+        public void MultidimensionalDevice_SendCounter()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             IDocument doc1 = new ImageDocument("aaa.jpg");
             IDocument doc2 = new ImageDocument("aaa.jpg");
             IDocument doc3 = new ImageDocument("aaa.jpg");
             IDocument doc4 = new PDFDocument("aaa.pdf");
-            multifunctionalDevice.Send(doc1);
-            multifunctionalDevice.Send(doc2);
-            multifunctionalDevice.Send(doc3);
-            multifunctionalDevice.Send(doc4);
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.AllDevicesPowerOff();
+            multidimensionalDevice.Send(doc1);
+            multidimensionalDevice.Send(doc2);
+            multidimensionalDevice.Send(doc3);
+            multidimensionalDevice.Send(doc4);
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.AllDevicesPowerOff();
 
             IDocument doc5 = new TextDocument("aaa.txt");
             IDocument doc6 = new ImageDocument("aaa.jpg");
-            multifunctionalDevice.Send(doc5);
-            multifunctionalDevice.Send(doc6);
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.Send(doc5);
+            multidimensionalDevice.Send(doc6);
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             IDocument doc7 = new ImageDocument("aaa.jpg");
             IDocument doc8 = new TextDocument("aaa.txt");
-            multifunctionalDevice.Send(doc7);
-            multifunctionalDevice.Send(doc8);
+            multidimensionalDevice.Send(doc7);
+            multidimensionalDevice.Send(doc8);
 
-            Assert.AreEqual(multifunctionalDevice.SendCounter, 4);
+            Assert.AreEqual(multidimensionalDevice.SendCounter, 4);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_Send_TypeValidation()
+        public void MultidimensionalDevice_Send_TypeValidation()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1 = new PDFDocument("aaa.pdf");
-                multifunctionalDevice.Send(doc1);
+                multidimensionalDevice.Send(doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("File is not an image type (.jpg)."));
                 consoleOutput.Flush();
 
                 IDocument doc2 = new TextDocument("aaa.txt");
-                multifunctionalDevice.Send(doc1);
+                multidimensionalDevice.Send(doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("File is not an image type (.jpg)."));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_Send_TypeConversion()
+        public void MultidimensionalDevice_Send_TypeConversion()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             IDocument doc;
-            multifunctionalDevice.Scan(out doc);
+            multidimensionalDevice.Scan(out doc);
 
             Assert.IsTrue(Equals(doc.GetType(), typeof(ImageDocument)));
         }
