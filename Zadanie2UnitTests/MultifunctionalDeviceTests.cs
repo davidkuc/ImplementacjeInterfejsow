@@ -5,12 +5,12 @@ using Zadanie2.Devices;
 namespace Zadanie2UnitTests
 {
     [TestClass]
-    public class UnitTestCopier
+    public class UnitTestMultifunctionalDevice
     {
         [TestMethod]
         public void MultifunctionalDevice_GetState_StateOff()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOff();
 
             Assert.AreEqual(IDevice.State.off, multifunctionalDevice.GetState());
@@ -19,7 +19,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_GetState_StateOn()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             Assert.AreEqual(IDevice.State.on, multifunctionalDevice.GetState());
@@ -31,7 +31,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_Print_DeviceOn()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -50,7 +50,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_Print_DeviceOff()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -69,7 +69,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_Scan_DeviceOff()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -88,7 +88,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_Scan_DeviceOn()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -107,7 +107,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_Scan_FormatTypeDocument()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -137,7 +137,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_ScanAndPrint_DeviceOn()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -157,7 +157,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_ScanAndPrint_DeviceOff()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -174,7 +174,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_PrintCounter()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             IDocument doc1 = new PDFDocument("aaa.pdf");
@@ -199,7 +199,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_ScanCounter()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             IDocument doc1;
@@ -225,7 +225,7 @@ namespace Zadanie2UnitTests
         [TestMethod]
         public void MultifunctionalDevice_PowerOnCounter()
         {
-            var multifunctionalDevice = new Zadanie2.Devices.MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
             multifunctionalDevice.PowerOn();
             multifunctionalDevice.PowerOn();
@@ -255,5 +255,99 @@ namespace Zadanie2UnitTests
             Assert.AreEqual(3, multifunctionalDevice.Counter);
         }
 
+        [TestMethod]
+        public void MultifunctionalDevice_FAX_Scan_PowerOff()
+        {
+            IFax multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOff();
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                IDocument doc1;
+                multifunctionalDevice.Scan(out doc1);
+                Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultifunctionalDevice_FAX_Scan_PowerOn()
+        {
+            IFax multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOn();
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                IDocument doc1;
+                multifunctionalDevice.Scan(out doc1);
+                Assert.IsTrue(consoleOutput.GetOutput().Contains("Scan"));
+                Assert.IsTrue(consoleOutput.GetOutput().Contains(".jpg"));
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultifunctionalDevice_Send_PowerOn()
+        {
+            var multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOn();
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                IDocument doc1 = new ImageDocument("aaa.jpg");
+                multifunctionalDevice.Send(doc1);
+                Assert.IsTrue(consoleOutput.GetOutput().Contains("File sent"));
+                Assert.IsTrue(consoleOutput.GetOutput().Contains("Image"));
+                Assert.IsTrue(consoleOutput.GetOutput().Contains(".jpg"));
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultifunctionalDevice_Send_PowerOff()
+        {
+            var multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOff();
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                IDocument doc1 = new ImageDocument("aaa.jpg");
+                multifunctionalDevice.Send(doc1);
+                Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultifunctionalDevice_SendCounter()
+        {
+            var multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOn();
+
+            IDocument doc1 = new ImageDocument("aaa.jpg");
+            IDocument doc2 = new ImageDocument("aaa.jpg");
+            IDocument doc3 = new ImageDocument("aaa.jpg");
+            multifunctionalDevice.Send(doc1);
+            multifunctionalDevice.Send(doc2);
+            multifunctionalDevice.Send(doc3);
+            multifunctionalDevice.PowerOff();
+
+            IDocument doc4 = new ImageDocument("aaa.jpg");
+            multifunctionalDevice.Send(doc4);
+            multifunctionalDevice.PowerOn();
+
+            IDocument doc6 = new ImageDocument("aaa.jpg");
+            multifunctionalDevice.Send(doc6);
+
+            Assert.AreEqual(multifunctionalDevice.SendCounter, 4);
+        }
     }
 }

@@ -1,15 +1,20 @@
 ﻿using Zadanie2.Devices;
 
-public class MultifunctionalDevice : Zadanie2.Devices.MultifunctionalDevice, IFax
+public class MultifunctionalDevice : Copier, IFax
 {
     public int SendCounter { get; protected set; }
 
     public void Send(in IDocument document)
     {
-        Console.WriteLine($"{DateTime.Now} Scan: {document.GetFileName}.txt");
+        if (state != IDevice.State.on)
+        {
+            return;
+        }
+        Console.WriteLine($"File sent - {DateTime.Now} Image: {document.GetFileName()}.jpg");
+        SendCounter++;
     }
 
-     public void Scan(out IDocument document)
+     new public void Scan(out IDocument document)
     {
         var fileName = string.Empty;
 
@@ -21,7 +26,7 @@ public class MultifunctionalDevice : Zadanie2.Devices.MultifunctionalDevice, IFa
         }
         fileName = $"ImageScan{ScanCounter}";
         document = new ImageDocument(fileName);
-        Console.WriteLine($"{DateTime.Now} Scan: {fileName}.txt");
+        Console.WriteLine($"{DateTime.Now} Scan: {fileName}.jpg");
         ScanCounter++;
     }
 }
