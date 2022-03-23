@@ -74,6 +74,7 @@ namespace Zadanie3UnitTests
                  new Fax()
                  );
             multifunctionalDevice.PowerOff();
+            multifunctionalDevice.AllDevicesPowerOff();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -122,6 +123,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -146,6 +148,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -181,6 +184,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -228,6 +232,7 @@ namespace Zadanie3UnitTests
                  new Fax()
                  );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             IDocument doc1 = new PDFDocument("aaa.pdf");
             multifunctionalDevice.Print(in doc1);
@@ -258,6 +263,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             IDocument doc1;
             multifunctionalDevice.Scan(out doc1);
@@ -349,6 +355,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -372,6 +379,7 @@ namespace Zadanie3UnitTests
                  new Fax()
                  );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -418,6 +426,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             IDocument doc1 = new ImageDocument("aaa.jpg");
             IDocument doc2 = new ImageDocument("aaa.jpg");
@@ -428,12 +437,14 @@ namespace Zadanie3UnitTests
             multifunctionalDevice.Send(doc3);
             multifunctionalDevice.Send(doc4);
             multifunctionalDevice.PowerOff();
+            multifunctionalDevice.AllDevicesPowerOff();
 
             IDocument doc5 = new TextDocument("aaa.txt");
             IDocument doc6 = new ImageDocument("aaa.jpg");
             multifunctionalDevice.Send(doc5);
             multifunctionalDevice.Send(doc6);
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             IDocument doc7 = new ImageDocument("aaa.jpg");
             IDocument doc8 = new TextDocument("aaa.txt");
@@ -453,6 +464,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
@@ -480,6 +492,7 @@ namespace Zadanie3UnitTests
                 new Fax()
                 );
             multifunctionalDevice.PowerOn();
+            multifunctionalDevice.AllDevicesPowerOn();
 
             IDocument doc;
             multifunctionalDevice.Scan(out doc);
