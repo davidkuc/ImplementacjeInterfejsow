@@ -550,13 +550,14 @@ namespace Zadanie3UnitTests
                 );
 
             multidimensionalDevice.PowerOn();
-            multidimensionalDevice.AllDevicesPowerOn();
+
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
-                Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
+                multidimensionalDevice.AllDevicesPowerOn();
+                Assert.IsTrue(!consoleOutput.GetOutput().Contains($"turned off"));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
         }
@@ -570,7 +571,6 @@ namespace Zadanie3UnitTests
                 new Scanner(),
                 new Fax()
                 );
-
             multidimensionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -579,6 +579,70 @@ namespace Zadanie3UnitTests
             {
                 multidimensionalDevice.AllDevicesPowerOn();
                 Assert.IsTrue(consoleOutput.GetOutput().Contains($" is turned off."));
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultidimensionalDevice_DevicesPowerOn()
+        {
+            var multidimensionalDevice = new MultidimensionalDevice
+                (
+                new Printer(),
+                new Scanner(),
+                new Fax()
+                );
+
+            multidimensionalDevice.PowerOn();
+
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                multidimensionalDevice.PrinterPowerOn();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($"turned on"));
+                consoleOutput.Flush();
+
+                multidimensionalDevice.ScannerPowerOn();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($"turned on"));
+                consoleOutput.Flush();
+
+                multidimensionalDevice.FaxPowerOn();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($"turned on"));
+                consoleOutput.Flush();
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
+
+        [TestMethod]
+        public void MultidimensionalDevice_DevicesPowerOff()
+        {
+            var multidimensionalDevice = new MultidimensionalDevice
+                (
+                new Printer(),
+                new Scanner(),
+                new Fax()
+                );
+
+            multidimensionalDevice.PowerOn();
+
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                multidimensionalDevice.PrinterPowerOff();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($"turned off"));
+                consoleOutput.Flush();
+
+                multidimensionalDevice.ScannerPowerOff();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($"turned off"));
+                consoleOutput.Flush();
+
+                multidimensionalDevice.FaxPowerOff();
+                Assert.IsTrue(consoleOutput.GetOutput().Contains($"turned off"));
+                consoleOutput.Flush();
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
         }
