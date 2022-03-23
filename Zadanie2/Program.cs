@@ -3,6 +3,7 @@ multifunctionalDevice.PowerOn();
 
 IDocument doc1;
 multifunctionalDevice.Scan(out doc1);
+var name = doc1.GetFileName();
 multifunctionalDevice.Send(doc1);
 
 IDocument doc2;
