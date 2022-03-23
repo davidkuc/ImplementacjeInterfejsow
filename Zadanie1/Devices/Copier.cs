@@ -41,19 +41,19 @@ namespace Zadanie1.Devices
                     Console.WriteLine($"{DateTime.Now} Scan: {fileName}.pdf");
                     break;
                 case IDocument.FormatType.TXT:
-                    fileName = $"TextScan{ScanCounter}";
+                    fileName = $"TextScan{ScanCounter}.txt";
                     document = new TextDocument(fileName);
-                    Console.WriteLine($"{DateTime.Now} Scan: {fileName}.txt");
+                    Console.WriteLine($"{DateTime.Now} Scan: {fileName}");
                     break;
                 case IDocument.FormatType.JPG:
-                    fileName = $"ImageScan{ScanCounter}";
+                    fileName = $"ImageScan{ScanCounter}.jpg";
                     document = new ImageDocument(fileName);
-                    Console.WriteLine($"{DateTime.Now} Scan: {fileName}.jpg");
+                    Console.WriteLine($"{DateTime.Now} Scan: {fileName}");
                     break;
                 default:
-                    fileName = $"NoType{ScanCounter}";
-                    document = new TextDocument(fileName);
-                    Console.WriteLine($"{DateTime.Now} Scan: {fileName}.txt");
+                    fileName = $"Image{ScanCounter}.jpg";
+                    document = new ImageDocument(fileName);
+                    Console.WriteLine($"{DateTime.Now} Scan: {fileName}");
                     break;
             }
             ScanCounter++;
@@ -65,13 +65,12 @@ namespace Zadanie1.Devices
 
             if (state != IDevice.State.on)
             {
-                fileName = $"TextScan{ScanCounter}";
-                document = new TextDocument(fileName);
+                document = null;
                 return;
             }
-            fileName = $"TextScan{ScanCounter}";
+            fileName = $"ImageScan{ScanCounter}.jpg";
             document = new TextDocument(fileName);
-            Console.WriteLine($"{DateTime.Now} Scan: {fileName}.txt");
+            Console.WriteLine($"{DateTime.Now} Scan: {fileName}");
             ScanCounter++;
         }
 
