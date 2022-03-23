@@ -10,6 +10,7 @@
 
             if (state != IDevice.State.on)
             {
+                Console.WriteLine($"{this.GetType().Name} is turned off - cannot perform any action");
                 document = null;
                 return;
             }
@@ -46,6 +47,7 @@
 
             if (state != IDevice.State.on)
             {
+                Console.WriteLine($"{this.GetType().Name} is turned off - cannot perform any action");
                 document = null;
                 return;
             }

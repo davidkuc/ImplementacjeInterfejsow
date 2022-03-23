@@ -595,7 +595,6 @@ namespace Zadanie3UnitTests
 
             multidimensionalDevice.PowerOn();
 
-
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
@@ -626,7 +625,6 @@ namespace Zadanie3UnitTests
                 );
 
             multidimensionalDevice.PowerOn();
-
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();

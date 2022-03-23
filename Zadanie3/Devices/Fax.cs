@@ -6,6 +6,7 @@
     {
         if (state != IDevice.State.on)
         {
+            Console.WriteLine($"{this.GetType().Name} is turned off - cannot perform any action");
             return;
         }
 

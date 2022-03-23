@@ -6,7 +6,7 @@
     public void PowerOff()
     {
         state = IDevice.State.off;
-        Console.WriteLine("... Device is off !");
+        Console.WriteLine($"... {this.GetType().Name} is off !");
     }
 
     public void PowerOn()
@@ -17,7 +17,7 @@
         }
 
         state = IDevice.State.on;
-        Console.WriteLine("Device is on ...");
+        Console.WriteLine($"{this.GetType().Name} is on ...");
     }
 
     public int Counter { get; private set; } = 0;
