@@ -410,7 +410,7 @@ namespace Zadanie3UnitTests
             {
                 IDocument doc1 = new ImageDocument("aaa.jpg");
                 multidimensionalDevice.Send(doc1);
-                Assert.IsTrue(consoleOutput.GetOutput() == string.Empty);
+                Assert.IsTrue(!consoleOutput.GetOutput().Contains("File sent"));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
         }
@@ -435,8 +435,8 @@ namespace Zadanie3UnitTests
             multidimensionalDevice.Send(doc2);
             multidimensionalDevice.Send(doc3);
             multidimensionalDevice.Send(doc4);
-            multidimensionalDevice.PowerOff();
             multidimensionalDevice.AllDevicesPowerOff();
+            multidimensionalDevice.PowerOff();
 
             IDocument doc5 = new TextDocument("aaa.txt");
             IDocument doc6 = new ImageDocument("aaa.jpg");

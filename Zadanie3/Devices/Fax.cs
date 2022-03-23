@@ -15,7 +15,7 @@
             Console.WriteLine("File is not an image type (.jpg).");
             return;
         }
-        Console.WriteLine($"File sent - {DateTime.Now} Image: {document.GetFileName()}.jpg");
+        Console.WriteLine($"File sent - {DateTime.Now} Image: {document.GetFileName()}");
         SendCounter++;
     }
 }
