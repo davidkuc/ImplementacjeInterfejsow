@@ -2,7 +2,7 @@
 
 public class MultifunctionalDevice : Copier, IFax
 {
-    public int SendCounter { get; protected set; }
+    public int SendCounter { get; protected set;}
 
     public void Send(in IDocument document)
     {
@@ -11,7 +11,7 @@ public class MultifunctionalDevice : Copier, IFax
             return;
         }
 
-        if (!Equals(document, typeof(ImageDocument)))
+        if (!document.GetFileName().Contains(".jpg"))
         {
             Console.WriteLine("File is not an image type (.jpg).");
             return;

@@ -335,17 +335,23 @@ namespace Zadanie2UnitTests
             IDocument doc1 = new ImageDocument("aaa.jpg");
             IDocument doc2 = new ImageDocument("aaa.jpg");
             IDocument doc3 = new ImageDocument("aaa.jpg");
+            IDocument doc4 = new PDFDocument("aaa.pdf");
             multifunctionalDevice.Send(doc1);
             multifunctionalDevice.Send(doc2);
             multifunctionalDevice.Send(doc3);
+            multifunctionalDevice.Send(doc4);
             multifunctionalDevice.PowerOff();
 
-            IDocument doc4 = new ImageDocument("aaa.jpg");
-            multifunctionalDevice.Send(doc4);
+            IDocument doc5 = new TextDocument("aaa.txt");
+            IDocument doc6 = new ImageDocument("aaa.jpg");
+            multifunctionalDevice.Send(doc5);
+            multifunctionalDevice.Send(doc6);
             multifunctionalDevice.PowerOn();
 
-            IDocument doc6 = new ImageDocument("aaa.jpg");
-            multifunctionalDevice.Send(doc6);
+            IDocument doc7 = new ImageDocument("aaa.jpg");
+            IDocument doc8 = new TextDocument("aaa.txt");
+            multifunctionalDevice.Send(doc7);
+            multifunctionalDevice.Send(doc8);
 
             Assert.AreEqual(multifunctionalDevice.SendCounter, 4);
         }
