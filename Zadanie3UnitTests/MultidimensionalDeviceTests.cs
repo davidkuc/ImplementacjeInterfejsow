@@ -36,27 +36,26 @@ namespace Zadanie3UnitTests
             Assert.AreEqual(IDevice.State.on, multidimensionalDevice.GetState());
         }
 
-
         // weryfikacja, czy po wywołaniu metody `Print` i włączonej kopiarce w napisie pojawia się słowo `Print`
         // wymagane przekierowanie konsoli do strumienia StringWriter
         [TestMethod]
         public void MultidimensionalDevice_Print_DeviceOn()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                 (
                 new Printer(),
                 new Scanner(),
                 new Fax()
                 );
-            multifunctionalDevice.PowerOn();
-            multifunctionalDevice.AllDevicesPowerOn();
+            multidimensionalDevice.PowerOn();
+            multidimensionalDevice.AllDevicesPowerOn();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1 = new PDFDocument("aaa.pdf");
-                multifunctionalDevice.Print(in doc1);
+                multidimensionalDevice.Print(in doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Print"));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
@@ -67,21 +66,21 @@ namespace Zadanie3UnitTests
         [TestMethod]
         public void MultidimensionalDevice_Print_DeviceOff()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                  (
                  new Printer(),
                  new Scanner(),
                  new Fax()
                  );
-            multifunctionalDevice.PowerOff();
-            multifunctionalDevice.AllDevicesPowerOff();
+            multidimensionalDevice.PowerOff();
+            multidimensionalDevice.AllDevicesPowerOff();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1 = new PDFDocument("aaa.pdf");
-                multifunctionalDevice.Print(in doc1);
+                multidimensionalDevice.Print(in doc1);
                 Assert.IsFalse(consoleOutput.GetOutput().Contains("Print"));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
@@ -92,20 +91,20 @@ namespace Zadanie3UnitTests
         [TestMethod]
         public void MultidimensionalDevice_Scan_DeviceOff()
         {
-            var multifunctionalDevice = new MultidimensionalDevice
+            var multidimensionalDevice = new MultidimensionalDevice
                  (
                  new Printer(),
                  new Scanner(),
                  new Fax()
                  );
-            multifunctionalDevice.PowerOff();
+            multidimensionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
             using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1;
-                multifunctionalDevice.Scan(out doc1);
+                multidimensionalDevice.Scan(out doc1);
                 Assert.IsFalse(consoleOutput.GetOutput().Contains("Scan"));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
