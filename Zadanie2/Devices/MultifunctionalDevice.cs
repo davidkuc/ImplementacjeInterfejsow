@@ -10,11 +10,17 @@ public class MultifunctionalDevice : Copier, IFax
         {
             return;
         }
+
+        if (!Equals(document, typeof(ImageDocument)))
+        {
+            Console.WriteLine("File is not an image type (.jpg).");
+            return;
+        }
         Console.WriteLine($"File sent - {DateTime.Now} Image: {document.GetFileName()}.jpg");
         SendCounter++;
     }
 
-     new public void Scan(out IDocument document)
+    new public void Scan(out IDocument document)
     {
         var fileName = string.Empty;
 

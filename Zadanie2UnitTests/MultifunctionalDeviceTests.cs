@@ -349,5 +349,28 @@ namespace Zadanie2UnitTests
 
             Assert.AreEqual(multifunctionalDevice.SendCounter, 4);
         }
+
+        [TestMethod]
+        public void MultifunctionalDevice_Send_TypeValidation()
+        {
+            var multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOn();
+
+            var currentConsoleOut = Console.Out;
+            currentConsoleOut.Flush();
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
+            {
+                IDocument doc1 = new PDFDocument("aaa.pdf");
+                multifunctionalDevice.Send(doc1);
+                Assert.IsTrue(consoleOutput.GetOutput().Contains("File is not an image type (.jpg)."));
+                consoleOutput.Flush();
+
+                IDocument doc2 = new TextDocument("aaa.txt");
+                multifunctionalDevice.Send(doc1);
+                Assert.IsTrue(consoleOutput.GetOutput().Contains("File is not an image type (.jpg)."));
+            }
+            Assert.AreEqual(currentConsoleOut, Console.Out);
+
+        }
     }
 }

@@ -25,5 +25,10 @@ namespace Zadanie2UnitTests
             Console.SetOut(originalOutput);
             stringWriter.Dispose();
         }
+
+        public void Flush()
+        { 
+        stringWriter.Flush();
+        }
     }
 }
