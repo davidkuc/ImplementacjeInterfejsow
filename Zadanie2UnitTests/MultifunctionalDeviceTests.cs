@@ -256,9 +256,9 @@ namespace Zadanie2UnitTests
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_FAX_Scan_PowerOff()
+        public void MultifunctionalDevice_Scan_PowerOff()
         {
-            IFax multifunctionalDevice = new MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -273,9 +273,9 @@ namespace Zadanie2UnitTests
         }
 
         [TestMethod]
-        public void MultifunctionalDevice_FAX_Scan_PowerOn()
+        public void MultifunctionalDevice_Scan_PowerOn()
         {
-            IFax multifunctionalDevice = new MultifunctionalDevice();
+            var multifunctionalDevice = new MultifunctionalDevice();
             multifunctionalDevice.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -376,7 +376,18 @@ namespace Zadanie2UnitTests
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("File is not an image type (.jpg)."));
             }
             Assert.AreEqual(currentConsoleOut, Console.Out);
+        }
 
+        [TestMethod]
+        public void MultifunctionalDevice_Send_TypeConversion()
+        {
+            var multifunctionalDevice = new MultifunctionalDevice();
+            multifunctionalDevice.PowerOn();
+
+            IDocument doc;
+            multifunctionalDevice.Scan(out doc);
+
+            Assert.IsTrue(Equals(doc.GetType(), typeof(ImageDocument)));
         }
     }
 }
